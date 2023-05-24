@@ -15,19 +15,25 @@ public class UserDaoService {
 
     private static List<User> users = new ArrayList<>();
 
+    private static int usersCount = 0;
+
     static {
-        users.add(new User(1, "Kabelo", "kabelo@test.com", "tutor"));
-        users.add(new User(2, "Tshego", "tshego@test.com", "tutor"));
-        users.add(new User(3, "Mohau", "mohau@test.com", "learner"));
-        users.add(new User(4, "Masego", "masego@test.com", "learner"));
-        users.add(new User(5, "Ntu", "admin@test.com", "admin"));
+        users.add(new User(++usersCount, "Kabelo", "kabelo@test.com", "tutor"));
+        users.add(new User(++usersCount, "Tshego", "tshego@test.com", "tutor"));
+        users.add(new User(++usersCount, "Mohau", "mohau@test.com", "learner"));
+        users.add(new User(++usersCount, "Masego", "masego@test.com", "learner"));
+        users.add(new User(++usersCount, "Ntu", "admin@test.com", "admin"));
     }
 
     public List<User> findAll() {
         return users;
     }
 
-    // public User save(User user) {}
+    public User save(User user) {
+        user.setId(++usersCount);
+        users.add(user);
+        return user;
+    }
 
     public User findOne(int id) {
         Predicate<? super User> predicate = user -> user.getId().equals(id);
